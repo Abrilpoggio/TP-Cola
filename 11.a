@@ -1,0 +1,47 @@
+class Cola:
+    def __init__(self):
+        self.items = []
+    
+    def encolar(self, item):
+        self.items.append(item)
+    
+    def desencolar(self):
+        if not self.esta_vacia():
+            return self.items.pop(0)
+        return None
+    
+    def esta_vacia(self):
+        return len(self.items) == 0
+    
+    def tamanio(self):
+        return len(self.items)
+
+cola_personajes = Cola()
+personajes = [
+    {"nombre": "Leia Organa", "planeta": "Alderaan"},
+    {"nombre": "Luke Skywalker", "planeta": "Tatooine"},
+    {"nombre": "Han Solo", "planeta": "Corellia"},
+    {"nombre": "Chewbacca", "planeta": "Kashyyyk"},
+    {"nombre": "Yoda", "planeta": "Dagobah"},
+    {"nombre": "Wicket", "planeta": "Endor"}
+]
+
+for personaje in personajes:
+    cola_personajes.encolar(personaje)
+
+def mostrar_personajes_especificos(cola):
+    print("Personajes de Alderaan, Endor y Tatooine:")
+    personajes_filtrados = []
+    
+    for i in range(cola.tamanio()):
+        personaje = cola.desencolar()
+        
+        if personaje["planeta"] in ["Alderaan", "Endor", "Tatooine"]:
+            personajes_filtrados.append(personaje)
+        
+        cola.encolar(personaje)
+    
+    for personaje in personajes_filtrados:
+        print(f"{personaje['nombre']} del planeta {personaje['planeta']}")
+
+mostrar_personajes_especificos(cola_personajes)
